@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Driven LCA Tool for Metallurgy & Mining - Team SheSustain</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1 class="header-title">AI-Driven LCA Tool for Metallurgy & Mining</h1>
+                    <span class="team-badge">Team SheSustain | SIH2025</span>
+                </div>
+                <div class="header-right">
+                    <div class="status-indicator status-indicator--online">
+                        <span class="status-dot"></span>
+                        System Online
+                    </div>
+                    <!-- Logout Button -->
+                <button class="logout-btn" onclick="handleLogout()">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <ul class="nav-list">
+                <li><a href="#dashboard" class="nav-link active" data-section="dashboard">Dashboard</a></li>
+                <li><a href="#environmental" class="nav-link" data-section="environmental">Environmental</a></li>
+                <li><a href="#circular" class="nav-link" data-section="circular">Circular Economy</a></li>
+                <li><a href="#lifecycle" class="nav-link" data-section="lifecycle">Lifecycle</a></li>
+                <li><a href="#ai-predictions" class="nav-link" data-section="ai-predictions">AI Predictions</a></li>
+                <li><a href="#metals" class="nav-link" data-section="metals">Metals</a></li>
+                <li><a href="#optimization" class="nav-link" data-section="optimization">Optimization</a></li>
+                <li><a href="#reports" class="nav-link" data-section="reports">Reports</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Real-Time Dashboard</h2>
+                    <p>Monitor operational KPIs and system status in real-time</p>
+                </div>
+
+                <!-- KPI Cards -->
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-icon">⚡</div>
+                        <div class="kpi-content">
+                            <h3>Overall Efficiency</h3>
+                            <div class="kpi-value" id="efficiency-value">82%</div>
+                            <div class="kpi-trend trend-up">+3.2%</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon">🔋</div>
+                        <div class="kpi-content">
+                            <h3>Energy Consumption</h3>
+                            <div class="kpi-value" id="energy-value">52 kWh/tonne</div>
+                            <div class="kpi-trend trend-down">-1.8%</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon">💧</div>
+                        <div class="kpi-content">
+                            <h3>Water Usage</h3>
+                            <div class="kpi-value" id="water-value">0.78 m³/tonne</div>
+                            <div class="kpi-trend trend-up">+2.1%</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon">♻️</div>
+                        <div class="kpi-content">
+                            <h3>Circularity Score</h3>
+                            <div class="kpi-value" id="circularity-value">0.68</div>
+                            <div class="kpi-trend trend-up">+5.4%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Status Indicators -->
+                <div class="status-panel">
+                    <h3>Operational Status</h3>
+                    <div class="status-grid">
+                        <div class="status-item">
+                            <span class="status status--success">Extraction</span>
+                            <span class="status-value">Normal</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status status--warning">Processing</span>
+                            <span class="status-value">High Load</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status status--success">Manufacturing</span>
+                            <span class="status-value">Optimal</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status status--info">End-of-Life</span>
+                            <span class="status-value">Scheduled</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alerts Panel -->
+                <div class="alerts-panel">
+                    <h3>Environmental Alerts</h3>
+                    <div class="alert-item alert-warning">
+                        <span class="alert-icon">⚠️</span>
+                        <div class="alert-content">
+                            <strong>Water Usage Alert</strong>
+                            <p>Current water consumption exceeds benchmark by 20%</p>
+                            <span class="alert-time">2 minutes ago</span>
+                        </div>
+                    </div>
+                    <div class="alert-item alert-info">
+                        <span class="alert-icon">ℹ️</span>
+                        <div class="alert-content">
+                            <strong>AI Model Update</strong>
+                            <p>Yield prediction model retrained with 94.2% accuracy</p>
+                            <span class="alert-time">15 minutes ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Environmental Section -->
+        <section id="environmental" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Environmental Impact Assessment</h2>
+                    <p>Monitor and analyze environmental performance metrics</p>
+                </div>
+
+                <div class="environmental-grid">
+                    <div class="chart-container">
+                        <h3>Environmental Metrics Overview</h3>
+                        <img src="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/71bad451ee1679bc7093d4b9153b8edf/b8104fe1-ff46-42a9-9f77-af5ee4bf6345/699445f1.png" alt="Environmental Impact Dashboard" class="chart-image">
+                    </div>
+
+                    <div class="metrics-details">
+                        <div class="metric-card">
+                            <h4>Global Warming Potential</h4>
+                            <div class="metric-values">
+                                <span class="metric-current">285 kg CO₂ eq./tonne</span>
+                                <span class="metric-target">Target: 200</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 70%"></div>
+                            </div>
+                            <span class="progress-text">30% above target</span>
+                        </div>
+
+                        <div class="metric-card">
+                            <h4>Acidification Potential</h4>
+                            <div class="metric-values">
+                                <span class="metric-current">1.4 kg SO₂ eq./tonne</span>
+                                <span class="metric-target">Target: 0.9</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 64%"></div>
+                            </div>
+                            <span class="progress-text">56% above target</span>
+                        </div>
+
+                        <div class="metric-card">
+                            <h4>Eutrophication Potential</h4>
+                            <div class="metric-values">
+                                <span class="metric-current">0.9 kg PO₄³⁻ eq./tonne</span>
+                                <span class="metric-target">Target: 0.5</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 56%"></div>
+                            </div>
+                            <span class="progress-text">80% above target</span>
+                        </div>
+
+                        <div class="metric-card">
+                            <h4>Human Toxicity Potential</h4>
+                            <div class="metric-values">
+                                <span class="metric-current">2.3e-6 CTUh/tonne</span>
+                                <span class="metric-target">Target: 1.5e-6</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 65%"></div>
+                            </div>
+                            <span class="progress-text">53% above target</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Circular Economy Section -->
+        <section id="circular" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Circular Economy Metrics</h2>
+                    <p>Track progress towards circular economy goals</p>
+                </div>
+
+                <div class="circular-grid">
+                    <div class="chart-container">
+                        <h3>Circularity Performance Radar</h3>
+                        <img src="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/71bad451ee1679bc7093d4b9153b8edf/4a16b47f-91ca-4245-b351-e16044b0f4b0/d6a74fdf.png" alt="Circular Economy Radar Chart" class="chart-image">
+                    </div>
+
+                    <div class="circular-metrics">
+                        <div class="circular-metric">
+                            <div class="circular-header">
+                                <h4>Resource Productivity</h4>
+                                <span class="achievement-badge">71%</span>
+                            </div>
+                            <div class="circular-gauge">
+                                <div class="gauge-fill" style="width: 71%"></div>
+                            </div>
+                            <p>14.2/20.0 $/kg material</p>
+                        </div>
+
+                        <div class="circular-metric">
+                            <div class="circular-header">
+                                <h4>Recycled Material Content</h4>
+                                <span class="achievement-badge">45%</span>
+                            </div>
+                            <div class="circular-gauge">
+                                <div class="gauge-fill" style="width: 45%"></div>
+                            </div>
+                            <p>18/40% recycled content</p>
+                        </div>
+
+                        <div class="circular-metric">
+                            <div class="circular-header">
+                                <h4>Material Circularity Index</h4>
+                                <span class="achievement-badge">68%</span>
+                            </div>
+                            <div class="circular-gauge">
+                                <div class="gauge-fill" style="width: 68%"></div>
+                            </div>
+                            <p>0.58/0.85 circularity index</p>
+                        </div>
+
+                        <div class="circular-metric">
+                            <div class="circular-header">
+                                <h4>Waste Recovery Rate</h4>
+                                <span class="achievement-badge">76%</span>
+                            </div>
+                            <div class="circular-gauge">
+                                <div class="gauge-fill" style="width: 76%"></div>
+                            </div>
+                            <p>68/90% waste recovered</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lifecycle Section -->
+        <section id="lifecycle" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Lifecycle Stages Tracking</h2>
+                    <p>Explore processes and opportunities across the product lifecycle</p>
+                </div>
+
+                <div class="lifecycle-timeline">
+                    <div class="timeline-stage" data-stage="extraction">
+                        <div class="stage-icon">⛏️</div>
+                        <h4>Extraction</h4>
+                        <div class="stage-status status--success">Active</div>
+                    </div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-stage" data-stage="processing">
+                        <div class="stage-icon">⚙️</div>
+                        <h4>Processing</h4>
+                        <div class="stage-status status--warning">High Load</div>
+                    </div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-stage" data-stage="manufacturing">
+                        <div class="stage-icon">🏭</div>
+                        <h4>Manufacturing</h4>
+                        <div class="stage-status status--success">Optimal</div>
+                    </div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-stage" data-stage="usage">
+                        <div class="stage-icon">🔧</div>
+                        <h4>Usage</h4>
+                        <div class="stage-status status--info">Monitoring</div>
+                    </div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-stage" data-stage="end-of-life">
+                        <div class="stage-icon">♻️</div>
+                        <h4>End-of-Life</h4>
+                        <div class="stage-status status--info">Scheduled</div>
+                    </div>
+                </div>
+
+                <div class="stage-details" id="stage-details">
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>Select a lifecycle stage to view details</h3>
+                            <p>Click on any stage above to see processes, environmental factors, and circular economy opportunities.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Predictions Section -->
+        <section id="ai-predictions" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>AI Predictions & Models</h2>
+                    <p>Monitor AI model performance and real-time predictions</p>
+                </div>
+
+                <div class="ai-grid">
+                    <div class="ai-models">
+                        <h3>Model Status</h3>
+                        <div class="model-card">
+                            <div class="model-header">
+                                <h4>Yield Prediction</h4>
+                                <span class="model-status status--success">Active</span>
+                            </div>
+                            <div class="model-details">
+                                <span class="model-algorithm">XGBoost</span>
+                                <span class="model-accuracy">94.2% accuracy</span>
+                            </div>
+                        </div>
+
+                        <div class="model-card">
+                            <div class="model-header">
+                                <h4>Energy Forecasting</h4>
+                                <span class="model-status status--success">Active</span>
+                            </div>
+                            <div class="model-details">
+                                <span class="model-algorithm">Prophet</span>
+                                <span class="model-accuracy">89.7% accuracy</span>
+                            </div>
+                        </div>
+
+                        <div class="model-card">
+                            <div class="model-header">
+                                <h4>Scrap Quality Classification</h4>
+                                <span class="model-status status--success">Active</span>
+                            </div>
+                            <div class="model-details">
+                                <span class="model-algorithm">CNN</span>
+                                <span class="model-accuracy">92.1% accuracy</span>
+                            </div>
+                        </div>
+
+                        <div class="model-card">
+                            <div class="model-header">
+                                <h4>Environmental Impact Prediction</h4>
+                                <span class="model-status status--success">Active</span>
+                            </div>
+                            <div class="model-details">
+                                <span class="model-algorithm">LightGBM</span>
+                                <span class="model-accuracy">91.5% accuracy</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="predictions-panel">
+                        <h3>Real-Time Predictions</h3>
+                        <div class="prediction-item">
+                            <div class="prediction-label">Next Maintenance</div>
+                            <div class="prediction-value">7 days</div>
+                            <div class="prediction-confidence">Confidence: 87%</div>
+                        </div>
+                        <div class="prediction-item">
+                            <div class="prediction-label">Yield Forecast</div>
+                            <div class="prediction-value">89.2%</div>
+                            <div class="prediction-confidence">Confidence: 94%</div>
+                        </div>
+                        <div class="prediction-item">
+                            <div class="prediction-label">Energy Trend</div>
+                            <div class="prediction-value trend-down">↓ 3.2%</div>
+                            <div class="prediction-confidence">Confidence: 90%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Metals Database Section -->
+        <section id="metals" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Metals Database</h2>
+                    <p>Browse available metals and their circularity scores</p>
+                </div>
+
+                <div class="metals-controls">
+                    <input type="text" id="metals-search" class="form-control" placeholder="Search metals...">
+                    <select id="metals-filter" class="form-control">
+                        <option value="">All Status</option>
+                        <option value="Available">Available</option>
+                        <option value="In Development">In Development</option>
+                        <option value="Planned">Planned</option>
+                    </select>
+                </div>
+
+                <div class="metals-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Metal</th>
+                                <th>Status</th>
+                                <th>Circularity Score</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="metals-tbody">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Optimization Section -->
+        <section id="optimization" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Multi-Objective Optimization</h2>
+                    <p>Configure and run optimization scenarios</p>
+                </div>
+
+                <div class="optimization-grid">
+                    <div class="optimization-controls">
+                        <h3>Optimization Objectives</h3>
+                        <div class="objective-control">
+                            <label>Minimize CO₂ Emissions</label>
+                            <input type="range" id="co2-weight" min="0" max="100" value="25" class="slider">
+                            <span class="weight-value">25%</span>
+                        </div>
+                        <div class="objective-control">
+                            <label>Minimize Costs</label>
+                            <input type="range" id="cost-weight" min="0" max="100" value="30" class="slider">
+                            <span class="weight-value">30%</span>
+                        </div>
+                        <div class="objective-control">
+                            <label>Maximize Recovery Rates</label>
+                            <input type="range" id="recovery-weight" min="0" max="100" value="25" class="slider">
+                            <span class="weight-value">25%</span>
+                        </div>
+                        <div class="objective-control">
+                            <label>Minimize Water Usage</label>
+                            <input type="range" id="water-weight" min="0" max="100" value="20" class="slider">
+                            <span class="weight-value">20%</span>
+                        </div>
+                        <button class="btn btn--primary" id="run-optimization">
+                            <span class="btn-text">Run Optimization</span>
+                            <span class="loading-spinner hidden">⏳</span>
+                        </button>
+                    </div>
+
+                    <div class="optimization-results">
+                        <h3>Optimization Results</h3>
+                        <div id="results-content" class="results-placeholder">
+                            <p>Configure objectives and click "Run Optimization" to see results</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reports Section -->
+        <section id="reports" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Sustainability Reports</h2>
+                    <p>Generate and export comprehensive sustainability reports</p>
+                </div>
+
+                <div class="reports-grid">
+                    <div class="goals-tracker">
+                        <h3>Sustainability Goals Progress</h3>
+                        <div class="goal-item">
+                            <div class="goal-header">
+                                <h4>Carbon Neutral by 2030</h4>
+                                <span class="goal-countdown">5 years remaining</span>
+                            </div>
+                            <div class="goal-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 35%"></div>
+                                </div>
+                                <span>35% progress</span>
+                            </div>
+                        </div>
+
+                        <div class="goal-item">
+                            <div class="goal-header">
+                                <h4>85% Circular Economy Target</h4>
+                                <span class="goal-countdown">Current: 68%</span>
+                            </div>
+                            <div class="goal-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 80%"></div>
+                                </div>
+                                <span>80% progress</span>
+                            </div>
+                        </div>
+
+                        <div class="goal-item">
+                            <div class="goal-header">
+                                <h4>40% Water Reduction Goal</h4>
+                                <span class="goal-countdown">Current: +20%</span>
+                            </div>
+                            <div class="goal-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 15%"></div>
+                                </div>
+                                <span>15% progress</span>
+                            </div>
+                        </div>
+
+                        <div class="goal-item">
+                            <div class="goal-header">
+                                <h4>95% Waste Diversion Target</h4>
+                                <span class="goal-countdown">Current: 68%</span>
+                            </div>
+                            <div class="goal-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 72%"></div>
+                                </div>
+                                <span>72% progress</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="report-actions">
+                        <h3>Generate Reports</h3>
+                        <div class="report-options">
+                            <button class="btn btn--primary" id="generate-sustainability-report">Generate Sustainability Report</button>
+                            <button class="btn btn--secondary" id="export-json">Export Data (JSON)</button>
+                            <button class="btn btn--secondary" id="export-csv">Export Data (CSV)</button>
+                            <button class="btn btn--outline" id="print-report">Print Report</button>
+                        </div>
+
+                        <div class="report-preview" id="report-preview">
+                            <h4>Report Preview</h4>
+                            <div class="preview-content">
+                                <p>Generated reports will appear here...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="loading-spinner-large">⏳</div>
+        <p>Processing...</p>
+    </div>
+    
+    
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

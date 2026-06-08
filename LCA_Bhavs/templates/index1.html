@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MetalSustain Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: #1a1a1a;
+            /* dark background */
+            color: #f0f0f0;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: linear-gradient(180deg, #064b56, #006d77);
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 30px 20px;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar h2 {
+            margin-bottom: 40px;
+            text-align: center;
+            font-size: 22px;
+            letter-spacing: 1px;
+        }
+
+        .sidebar nav {
+            flex-grow: 1;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+            transition: background 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: #2ec4b6;
+            /* cyan highlight */
+            color: #1a1a1a;
+            font-weight: bold;
+            transform: translateX(4px);
+        }
+
+        /* Logout button */
+        .logout-btn {
+            background: #ef4444;
+            padding: 12px;
+            text-align: center;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            margin-top: auto;
+            /* pushes it down */
+            margin-bottom: 40px;
+            /* bring it a little up from the edge */
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+            transform: scale(1.05);
+        }
+
+        /* Main */
+        .main {
+            margin-left: 270px;
+            padding: 30px;
+            transition: all 0.4s ease;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Card */
+        .card {
+            background: #262626;
+            /* dark gray cards */
+            border-left: 5px solid #2ec4b6;
+            /* cyan accent border */
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+
+
+
+        #efficiencyScore {
+            max-width: 200px;
+            /* smaller size */
+            max-height: 200px;
+        }
+
+        /* Inputs */
+        input,
+        button {
+            padding: 10px;
+            margin: 8px 0;
+            width: 100%;
+            border: 1px solid #2ec4b6;
+            border-radius: 6px;
+            font-size: 14px;
+            background: #1a1a1a;
+            color: #f0f0f0;
+        }
+
+        input::placeholder {
+            color: #888;
+        }
+
+        button {
+            background: #2ec4b6;
+            color: #1a1a1a;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #1fc2a7;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div>
+            <h2>⚙MetalSustain⚙</h2>
+            <nav>
+                <a id="tab-dashboard" onclick="showPage('dashboard', this)" class="active">Dashboard</a>
+                <a id="tab-process" onclick="showPage('process', this)">Process Input</a>
+                <a id="tab-predictions" onclick="showPage('predictions', this)"> Predictions</a>
+                <a id="tab-circularity" onclick="showPage('circularity', this)">Circularity</a>
+                <a id="tab-settings" onclick="showPage('settings', this)">Settings</a>
+            </nav>
+        </div>
+        <div class="logout-btn" onclick="logout()">Logout</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+
+        <!-- Dashboard -->
+        <div id="dashboard" class="page">
+            <h1>Welcome, Industry Expert</h1>
+
+            <!-- KPI Cards -->
+            <div class="card">⚡ Total Energy Consumption: <b>10,800 kWh</b></div>
+            <div class="card">💧 Total Water Usage: <b>39,500 L</b></div>
+            <div class="card">🌍 CO₂ Emissions: <b>680 CO₂e</b></div>
+            <div class="card">✅ Efficiency Score: <b>88%</b></div>
+
+            <!-- Resource Trends Line Chart -->
+            <div class="card">
+                <h3>📈 Resource Trends (6 months)</h3>
+                <canvas id="resourceTrends"></canvas>
+            </div>
+
+            <!-- Efficiency Doughnut -->
+            <div class="card chart-center">
+                <h3>⚙ Efficiency Breakdown</h3>
+                <canvas id="efficiencyScore" width="180" height="180"></canvas>
+                <p style="text-align:center; margin-top:10px; color:#aaa;">Overall Plant Efficiency</p>
+            </div>
+
+            <!-- New: Production Overview -->
+            <div class="card">
+                <h3>🏭 Production Overview</h3>
+                <p>Daily Average Throughput: <b>500 tons/day</b></p>
+                <p>Monthly Production: <b>15,000 tons</b></p>
+                <p>Downtime Losses: <b>2.5%</b></p>
+            </div>
+
+            <!-- New: Sustainability Targets -->
+            <div class="card">
+                <h3>🌱 Sustainability Targets</h3>
+                <ul>
+                    <li>Reduce CO₂ by <b>15%</b> this year</li>
+                    <li>Cut water usage by <b>20%</b> with recycling</li>
+                    <li>Improve energy efficiency to <b>92%</b></li>
+                </ul>
+            </div>
+
+            <!-- New: Recent Alerts -->
+            <div class="card">
+                <h3>🚨 Recent Alerts</h3>
+                <ul>
+                    <li>⚠ Furnace temperature exceeded threshold (1200°C)</li>
+                    <li>⚠ Water usage spike detected (42,000 L)</li>
+                    <li>✅ Energy consumption back to normal</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Process Input -->
+        <div id="process" class="page hidden">
+            <h1>Process Input Form</h1>
+            <div class="card">
+                <form>
+                    <label>Energy Consumption (kWh)</label>
+                    <input type="number" placeholder="15000">
+                    <label>Water Usage (L)</label>
+                    <input type="number" placeholder="50000">
+                    <label>Ore Grade (%)</label>
+                    <input type="number" placeholder="2.5">
+                    <label>Furnace Temperature (°C)</label>
+                    <input type="number" placeholder="1200">
+                    <label>Daily Processing Capacity (tons/day)</label>
+                    <input type="number" placeholder="500">
+                    <button type="submit">Submit to AI Model</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Predictions -->
+        <!--<div id="predictions" class="page hidden">
+            <h1>Predictions & Reports</h1>
+            <div class="card">
+                <h3>Predictive Analytics</h3>
+                <p>Next Week Energy Forecast: <b>9,850 kWh</b></p>
+                <p>Water Usage Projection: <b>36,200 L</b></p>
+                <button onclick="window.location.href='/form'">🔮 Try ML Prediction</button>
+            </div>
+            <div class="card">
+                <h3>📑 Downloadable Reports</h3>
+                <button>Monthly Sustainability Report</button>
+                <button>Performance Analytics Report</button>
+                <button>Generate Custom Report</button>
+            </div>
+        </div>-->
+
+        <section id="ai-predictions">
+            <h2>AI Predictions</h2>
+            <p>Enter process parameters and get predictions from the KNN model:</p>
+
+            <form id="prediction-form">
+                <label>⚡ Energy Consumption (kWh)</label>
+                <input type="number" name="electricity_kWh" placeholder="15000" required>
+
+                <label>💧 Water Usage (L)</label>
+                <input type="number" name="water_L" placeholder="50000" required>
+
+                <label>🌍 Ore Grade (%)</label>
+                <input type="number" step="0.01" name="ore_grade_pct" placeholder="2.5" required>
+
+                <label>🔥 Furnace Temperature (°C)</label>
+                <input type="number" name="furnace_temp_C" placeholder="1200" required>
+
+                <label>🏭 Daily Processing Capacity (tons/day)</label>
+                <input type="number" name="throughput_tpd" placeholder="500" required>
+
+                <button type="submit">🔮 Predict</button>
+            </form>
+
+            <div id="knn-result" class="prediction-result"></div>
+        </section>
+
+
+
+
+        <!-- Circularity -->
+        <div id="circularity" class="page hidden">
+            <h1>Circularity Analysis</h1>
+            <div class="card">Material Recovery: <b>78%</b></div>
+            <div class="card">Waste Reduction: <b>-24%</b></div>
+            <div class="card">Circular Score: <b>8.2/10</b></div>
+            <div class="card">
+                <h3>💡 Circular Economy Recommendations</h3>
+                <ul>
+                    <li>Slag Utilization – Convert 85% of slag waste into construction materials.</li>
+                    <li>Heat Recovery – Capture waste heat for pre-heating processes.</li>
+                    <li>Water Circuit Closure – Closed-loop system for 95% reuse.</li>
+                    <li>Byproduct Valorization – Transform byproducts into secondary materials.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Settings -->
+        <div id="settings" class="page hidden">
+            <h1>Settings</h1>
+            <div class="card">
+                <h3>Profile Settings</h3>
+                <label>Full Name</label>
+                <input type="text" placeholder="John Doe">
+                <label>Email</label>
+                <input type="email" placeholder="you@example.com">
+                <label>Password</label>
+                <input type="password" placeholder="">
+                <button>Save Changes</button>
+            </div>
+            <div class="card">
+                <h3>Preferences</h3>
+                <label><input type="checkbox"> Enable Dark Mode</label><br>
+                <label><input type="checkbox"> Receive Notifications</label><br>
+                <button>Update Preferences</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Navigation
+        function showPage(pageId, el) {
+            document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+            document.getElementById(pageId).classList.remove('hidden');
+
+            // Highlight active tab
+            document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
+            if (el) el.classList.add('active');
+        }
+
+        // Logout
+        function logout() {
+            window.location.href = "login.html"; // redirect to login page
+        }
+
+        // Handle prediction form submission
+        document.getElementById("prediction-form").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            try {
+                const response = await fetch("/predict", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const resultHTML = await response.text();
+                document.getElementById("knn-result").innerHTML = resultHTML;
+
+            } catch (error) {
+                document.getElementById("knn-result").innerHTML = "❌ Error connecting to server!";
+            }
+        });
+
+
+        // Charts
+        window.onload = () => {
+            const ctx1 = document.getElementById('resourceTrends');
+            if (ctx1) {
+                new Chart(ctx1, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [
+                            { label: 'Water (L)', data: [40000, 42000, 39000, 43000, 41000, 40000], borderColor: '#2ec4b6', backgroundColor: 'rgba(46,196,182,0.1)', fill: true },
+                            { label: 'Energy (kWh)', data: [12000, 13000, 12500, 13500, 12800, 12400], borderColor: '#00a896', backgroundColor: 'rgba(0,168,150,0.1)', fill: true },
+                            { label: 'CO₂ (t)', data: [800, 780, 760, 740, 720, 700], borderColor: '#ef4444', backgroundColor: 'rgba(239,68,68,0.1)', fill: true }
+                        ]
+                    },
+                    options: {
+                        plugins: { legend: { labels: { color: "#f0f0f0" } } },
+                        scales: { x: { ticks: { color: "#ccc" } }, y: { ticks: { color: "#ccc" } } }
+                    }
+                });
+            }
+            const ctx2 = document.getElementById('efficiencyScore');
+            if (ctx2) {
+                new Chart(ctx2, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Efficiency', 'Remaining'],
+                        datasets: [
+                            { data: [88, 12], backgroundColor: ['#2ec4b6', '#444'] }
+                        ]
+                    },
+                    options: { cutout: '70%', plugins: { legend: { display: false } } }
+                });
+            }
+        };
+    </script>
+</body>
+
+</html>

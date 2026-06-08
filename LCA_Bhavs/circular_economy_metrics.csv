@@ -1,0 +1,5 @@
+id,name,unit,description,benchmark,target,current
+resource_productivity,Resource Productivity,$/kg material,Economic output per unit of raw material,15.5,20.0,14.2
+recycled_content,Recycled Material Content,%,Share of recycled materials in production,25.0,40.0,18.0
+material_circularity,Material Circularity Index,Index (0-1),Overall circularity performance,0.65,0.85,0.58
+waste_recovery,Waste Recovery Rate,%,Percentage of waste recovered for reuse/recycling,75.0,90.0,68.0

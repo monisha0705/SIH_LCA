@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #064b56;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 400px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+        h2 {
+            margin-bottom: 15px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 15px;
+            color: #2ec4b6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            color: #00b3a4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Predicted CO₂ Emission</h2>
+        <p><strong>{{ prediction }}</strong> kg</p>
+        <a href="/">🔄 Try Again</a>
+    </div>
+</body>
+</html>

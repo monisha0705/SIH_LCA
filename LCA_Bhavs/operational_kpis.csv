@@ -1,0 +1,5 @@
+id,name,unit,description,benchmark,target,current
+energy_intensity,Energy Consumption,kWh/tonne,Energy used per tonne of material processed,45.0,35.0,52.0
+water_usage,Water Usage,m³/tonne,Water consumed per tonne processed,0.65,0.45,0.78
+ore_recovery,Ore Recovery Rate,%,Percentage of valuable minerals extracted,91.0,95.0,88.0
+equipment_utilization,Equipment Utilization,%,Operational uptime of equipment,85.0,90.0,82.0

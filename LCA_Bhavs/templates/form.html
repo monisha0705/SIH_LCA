@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process Input</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #064b56;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            width: 400px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #2ec4b6;
+            border-radius: 5px;
+            background-color: #1a1a1a;
+            color: white;
+        }
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #2ec4b6;
+            color: black;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #00b3a4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Enter Process Data</h2>
+        <form action="/predict" method="POST">
+            <label>Electricity (kWh):</label>
+            <input type="number" step="any" name="electricity_kWh" required>
+
+            <label>Water (L):</label>
+            <input type="number" step="any" name="water_L" required>
+
+            <label>Ore Grade (%):</label>
+            <input type="number" step="any" name="ore_grade_pct" required>
+
+            <label>Furnace Temp (°C):</label>
+            <input type="number" step="any" name="furnace_temp_C" required>
+
+            <label>Throughput (TPD):</label>
+            <input type="number" step="any" name="throughput_tpd" required>
+
+            <button type="submit">Predict CO₂ Emission</button>
+        </form>
+    </div>
+</body>
+</html>

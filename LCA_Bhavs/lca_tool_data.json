@@ -1,0 +1,329 @@
+{
+  "project_info": {
+    "title": "AI-Driven Life Cycle Assessment Tool for Metallurgy & Mining",
+    "team": "SheSustain",
+    "problem_id": "SIH25069",
+    "theme": "Advancing Circularity and Sustainability"
+  },
+  "lca_metrics": {
+    "environmental_impacts": [
+      {
+        "id": "gwp",
+        "name": "Global Warming Potential",
+        "unit": "kg CO\u2082 eq./tonne",
+        "description": "Greenhouse gas emissions from mining activities",
+        "benchmark": 275,
+        "target": 200,
+        "current": 285
+      },
+      {
+        "id": "acidification",
+        "name": "Acidification Potential",
+        "unit": "kg SO\u2082 eq./tonne",
+        "description": "Acid rain formation potential",
+        "benchmark": 1.2,
+        "target": 0.9,
+        "current": 1.4
+      },
+      {
+        "id": "eutrophication",
+        "name": "Eutrophication Potential",
+        "unit": "kg PO\u2084\u00b3\u207b eq./tonne",
+        "description": "Water body nutrient pollution",
+        "benchmark": 0.8,
+        "target": 0.5,
+        "current": 0.9
+      },
+      {
+        "id": "human_toxicity",
+        "name": "Human Toxicity Potential",
+        "unit": "CTUh/tonne",
+        "description": "Potential impact on human health",
+        "benchmark": 2.1e-06,
+        "target": 1.5e-06,
+        "current": 2.3e-06
+      }
+    ],
+    "circular_economy_metrics": [
+      {
+        "id": "resource_productivity",
+        "name": "Resource Productivity",
+        "unit": "$/kg material",
+        "description": "Economic output per unit of raw material",
+        "benchmark": 15.5,
+        "target": 20.0,
+        "current": 14.2
+      },
+      {
+        "id": "recycled_content",
+        "name": "Recycled Material Content",
+        "unit": "%",
+        "description": "Share of recycled materials in production",
+        "benchmark": 25,
+        "target": 40,
+        "current": 18
+      },
+      {
+        "id": "material_circularity",
+        "name": "Material Circularity Index",
+        "unit": "Index (0-1)",
+        "description": "Overall circularity performance",
+        "benchmark": 0.65,
+        "target": 0.85,
+        "current": 0.58
+      },
+      {
+        "id": "waste_recovery",
+        "name": "Waste Recovery Rate",
+        "unit": "%",
+        "description": "Percentage of waste recovered for reuse/recycling",
+        "benchmark": 75,
+        "target": 90,
+        "current": 68
+      }
+    ],
+    "operational_kpis": [
+      {
+        "id": "energy_intensity",
+        "name": "Energy Consumption",
+        "unit": "kWh/tonne",
+        "description": "Energy used per tonne of material processed",
+        "benchmark": 45,
+        "target": 35,
+        "current": 52
+      },
+      {
+        "id": "water_usage",
+        "name": "Water Usage",
+        "unit": "m\u00b3/tonne",
+        "description": "Water consumed per tonne processed",
+        "benchmark": 0.65,
+        "target": 0.45,
+        "current": 0.78
+      },
+      {
+        "id": "ore_recovery",
+        "name": "Ore Recovery Rate",
+        "unit": "%",
+        "description": "Percentage of valuable minerals extracted",
+        "benchmark": 91,
+        "target": 95,
+        "current": 88
+      },
+      {
+        "id": "equipment_utilization",
+        "name": "Equipment Utilization",
+        "unit": "%",
+        "description": "Operational uptime of equipment",
+        "benchmark": 85,
+        "target": 90,
+        "current": 82
+      }
+    ]
+  },
+  "ai_capabilities": {
+    "predictive_models": [
+      {
+        "name": "Yield Prediction",
+        "algorithm": "XGBoost",
+        "accuracy": 94.2,
+        "purpose": "Predict metal extraction yields based on ore characteristics"
+      },
+      {
+        "name": "Energy Forecasting",
+        "algorithm": "Prophet",
+        "accuracy": 89.7,
+        "purpose": "Time-series forecasting for energy consumption patterns"
+      },
+      {
+        "name": "Scrap Quality Classification",
+        "algorithm": "CNN",
+        "accuracy": 92.1,
+        "purpose": "Classify scrap quality using computer vision"
+      },
+      {
+        "name": "Environmental Impact Prediction",
+        "algorithm": "LightGBM",
+        "accuracy": 91.5,
+        "purpose": "Predict environmental impacts for different scenarios"
+      }
+    ],
+    "optimization_features": [
+      {
+        "name": "Multi-objective Optimization",
+        "tools": [
+          "Pyomo",
+          "OR-Tools"
+        ],
+        "objectives": [
+          "Minimize CO\u2082",
+          "Minimize Cost",
+          "Maximize Recovery",
+          "Minimize Water Usage"
+        ]
+      },
+      {
+        "name": "Data Imputation",
+        "methods": [
+          "KNN Imputation",
+          "MICE",
+          "Random Forest"
+        ],
+        "accuracy": 87.3
+      }
+    ]
+  },
+  "lifecycle_stages": [
+    {
+      "stage": "Extraction",
+      "processes": [
+        "Drilling",
+        "Blasting",
+        "Loading",
+        "Hauling"
+      ],
+      "environmental_factors": [
+        "Dust emissions",
+        "Noise",
+        "Land disturbance",
+        "Energy consumption"
+      ],
+      "circular_opportunities": [
+        "Waste rock utilization",
+        "Energy recovery"
+      ]
+    },
+    {
+      "stage": "Processing",
+      "processes": [
+        "Crushing",
+        "Grinding",
+        "Flotation",
+        "Smelting"
+      ],
+      "environmental_factors": [
+        "Energy consumption",
+        "Water usage",
+        "Chemical emissions",
+        "Waste generation"
+      ],
+      "circular_opportunities": [
+        "By-product recovery",
+        "Water recycling",
+        "Heat recovery"
+      ]
+    },
+    {
+      "stage": "Manufacturing",
+      "processes": [
+        "Refining",
+        "Alloying",
+        "Shaping",
+        "Finishing"
+      ],
+      "environmental_factors": [
+        "Energy consumption",
+        "Material losses",
+        "Chemical usage"
+      ],
+      "circular_opportunities": [
+        "Scrap utilization",
+        "Process optimization",
+        "Material substitution"
+      ]
+    },
+    {
+      "stage": "Usage",
+      "processes": [
+        "Application",
+        "Maintenance",
+        "Performance"
+      ],
+      "environmental_factors": [
+        "Service life",
+        "Efficiency",
+        "Maintenance requirements"
+      ],
+      "circular_opportunities": [
+        "Life extension",
+        "Reuse",
+        "Remanufacturing"
+      ]
+    },
+    {
+      "stage": "End-of-Life",
+      "processes": [
+        "Collection",
+        "Sorting",
+        "Recovery",
+        "Disposal"
+      ],
+      "environmental_factors": [
+        "Collection efficiency",
+        "Recovery losses",
+        "Disposal impacts"
+      ],
+      "circular_opportunities": [
+        "Recycling",
+        "Material recovery",
+        "Secondary production"
+      ]
+    }
+  ],
+  "real_time_data": {
+    "timestamp": "2025-09-08T10:56:16.477420",
+    "operational_status": {
+      "active_processes": 12,
+      "total_processes": 12,
+      "overall_efficiency": 85.5,
+      "energy_consumption": 51.0,
+      "water_usage": 0.88
+    },
+    "environmental_alerts": [
+      {
+        "type": "CO\u2082 Emissions",
+        "level": "Normal",
+        "value": 271.6
+      },
+      {
+        "type": "Water Quality",
+        "level": "Critical",
+        "value": 7.4
+      }
+    ],
+    "circularity_score": 0.62,
+    "ai_predictions": {
+      "next_maintenance": "5 days",
+      "yield_forecast": 91.6,
+      "energy_trend": "Stable"
+    }
+  },
+  "metals_database": [
+    {
+      "name": "Aluminum",
+      "status": "Available",
+      "circularity_score": 0.72
+    },
+    {
+      "name": "Copper",
+      "status": "In Development",
+      "circularity_score": 0.65
+    },
+    {
+      "name": "Nickel",
+      "status": "Planned",
+      "circularity_score": 0.58
+    },
+    {
+      "name": "Steel",
+      "status": "Available",
+      "circularity_score": 0.68
+    }
+  ],
+  "sustainability_goals": {
+    "carbon_neutral_by": 2030,
+    "circular_economy_target": 85,
+    "water_reduction_goal": 40,
+    "waste_diversion_target": 95
+  }
+}
